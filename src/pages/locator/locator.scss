@@ -1,0 +1,40 @@
+page-locator {
+  .content {
+    @extend .night;
+  }
+  .header-md::after {
+    content: none;
+  }
+  .header-ios .toolbar-background-ios {
+    border: none;
+  }
+  .card-background-container {
+
+  ion-card {
+    position: relative;
+    text-align: center;
+  }
+
+  .card-title {
+    position: absolute;
+    top: 36%;
+    font-size: 2.0em;
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  .card-subtitle {
+    font-size: 1.0em;
+    position: absolute;
+    top: 52%;
+    width: 100%;
+    color: #fff;
+  }
+
+}
+}
+
+.locations-list {
+  background: rgba(255, 255, 255, 0.8);
+}

@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-navbar color="transparent">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <!--<ion-buttons end>
+      <button ion-button icon-only clear (click)="presentPopover($event)">
+        <ion-icon name="more" color="white"></ion-icon>
+      </button>
+    </ion-buttons>-->
+    <ion-title text-center>{{locationDetails.address_components[2].long_name}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <p ion-text color="light" text-center no-margin>
+    {{locationDetails['address_components'][3]['short_name']}}, {{locationDetails['address_components'][4]['long_name']}} <br> {{currentTime*1000 | date:"EE, MMM d"}}
+  </p>
+
+
+  <div text-center>
+    <h1 ion-text color="white" text-center class="large-text">{{weatherData?.currently?.temperature | number: '1.0-0'}}°c</h1>
+    <!--<ion-icon name="{{weatherData?.currently?.icon}}" color="white" margin class="large-icon"></ion-icon>-->
+    <ion-icon name="sunny" color="white" margin class="large-icon"></ion-icon>
+    
+    <p ion-text color="light">{{weatherData?.currently?.summary}}</p>
+  </div>
+
+
+
+</ion-content>
+<ion-footer>
+    <div class="timing-details">
+
+  <ion-toolbar color="opacity">
+    <ion-segment [(ngModel)]="timing" ion-text color="gray">
+      <ion-segment-button value="hourly">
+        hourly
+      </ion-segment-button>
+      <ion-segment-button value="daily">
+        daily
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+  <div [ngSwitch]="timing" class="timing-details__list">
+    <ion-list *ngSwitchCase="'hourly'" no-margin> 
+      <ion-item color="opacity" *ngFor="let hourlyData of weatherData?.hourly?.data">
+        <ion-row ion-text color="gray">
+          <ion-col col-4>{{hourlyData?.time*1000 | date:"shortTime"}}</ion-col>
+          <ion-icon name="sunny" text-center col-4></ion-icon>
+          <ion-col col-4 text-right>{{hourlyData?.temperature | number: '1.0-0'}}°c</ion-col>
+        </ion-row>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'daily'" no-margin>
+      <ion-item color="opacity" *ngFor="let dailyData of weatherData?.daily?.data">
+        <ion-row ion-text color="gray">
+          <ion-col col-4>{{dailyData?.time*1000 | date:"MMM d"}}</ion-col>
+          <ion-icon name="sunny" text-center col-4></ion-icon>
+          <ion-col col-4 text-right>{{dailyData?.temperatureMin | number: '1.0-0'}}°c - {{dailyData?.temperatureMax | number: '1.0-0'}}°c</ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+  </div>
+</div>
+</ion-footer>

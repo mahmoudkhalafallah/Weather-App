@@ -1,0 +1,36 @@
+<ion-header>
+
+  <ion-navbar color="transparent">
+    <ion-title>locator</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <h1 ion-text color="white" *ngIf="locations?.length === 0">No Locations added, yet</h1>
+  <div color="white">
+    <ion-list *ngIf="locations?.length > 0" class="locations-list">
+      <ion-list-header>
+        Locations
+      </ion-list-header>
+      <ion-item-sliding *ngFor="let location of locations; let i = index; trackBy: trackLocation">
+        <ion-item>
+          <div (click)="goToWeatherDetails(location)">
+            <h5>{{location[1]['address_components'][0]['short_name']}},</h5>
+            <h5>{{location[1]['address_components'][2]['short_name']}}</h5>
+            <p>{{location[1]['address_components'][3]['short_name']}}, {{location[1]['address_components'][4]['long_name']}}</p>
+          </div>
+          <button ion-button item-right clear color="danger" icon-only (click)="delete(location)"><ion-icon name="close" padding></ion-icon></button>
+        </ion-item>
+        <ion-item-options side="left">
+          <button ion-button color="danger" (click)="delete(location)">
+                  <ion-icon name="close"></ion-icon>
+                  delete
+                </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+  <get-location></get-location>
+</ion-content>

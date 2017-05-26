@@ -1,0 +1,32 @@
+page-home {
+  .content {
+    @extend .night;
+  }
+  .scroll-content {
+    // min-height: 500px;
+  }
+  .header {
+    .toolbar-title {
+      max-width: 80%;
+      margin: 0 auto;
+    }
+    .back-button {
+      position: absolute;
+      z-index: 5;
+    }
+  }
+  .header-md::after {
+    content: none;
+  }
+
+  .header-ios .toolbar-background-ios {
+    border: none;
+  }
+
+  .timing-details { 
+    &__list {
+      max-height: 150px;
+      overflow-y: scroll;
+    }
+  }
+}
